@@ -1,5 +1,4 @@
 export const Note = (props) => {
-   console.log('props', props)
     const {content, date} = props
 
     return (
