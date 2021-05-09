@@ -7,7 +7,12 @@ export default function App(props) {
   //const [newNote, setNewNote] = useState('');
 
   const handleChange = (event) => {
-    console.log(event.target.value)
+    const newNote = event.target.value
+  }
+
+  const handleClick = (event) =>{
+     console.log('create note')
+
   }
 
   return(
@@ -20,7 +25,7 @@ export default function App(props) {
 
       <div>
       <input type='text' onChange={handleChange}/>
-      <button>New Note</button>
+      <button onClick={handleClick}>New Note</button>
       </div>
     </div>
     );
