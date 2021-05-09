@@ -12,13 +12,14 @@ export default function App(props) {
 
   const handleClick = (event) =>{
      console.log('create note');
-     const noteAddtoState = {
+     const noteAddToState = {
        id: notes.length + 1,
        content: newNote,
        date: new Date().toISOString(),
        important: Math.random() < 0.5
      };
-    setNotes(notes.concat(noteAddtoState));
+    setNotes(notes.concat(noteAddToState));
+    setNotes('')
   }
 
   return(
