@@ -4,15 +4,21 @@ import {useState} from 'react';
 
 export default function App(props) {
   const [notes, setNotes] = useState(props.notes);
-  //const [newNote, setNewNote] = useState('');
+  const [newNote, setNewNote] = useState('');
 
   const handleChange = (event) => {
-    const newNote = event.target.value
+    setNewNote(event.target.value);
   }
 
   const handleClick = (event) =>{
-     console.log('create note')
-
+     console.log('create note');
+     const noteAddtoState = {
+       id: notes.length + 1,
+       content: newNote,
+       date: new Date().toISOString(),
+       important: Math.random() < 0.5
+     };
+    setNotes(notes.concat(noteAddtoState));
   }
 
   return(
@@ -24,7 +30,7 @@ export default function App(props) {
       </ol>
 
       <div>
-      <input type='text' onChange={handleChange}/>
+      <input type='text' onChange={handleChange} value={newNote} />
       <button onClick={handleClick}>New Note</button>
       </div>
     </div>
