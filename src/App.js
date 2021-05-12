@@ -1,10 +1,19 @@
 import {Note} from './Note';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 
-export default function App(props) {
-  const [notes, setNotes] = useState(props.notes);
+export default function App() {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json())
+    .then(json => {
+       setNotes(json)
+    });
+  
+  }, []);
 
   const handleChange = (event) => {
     setNewNote(event.target.value);
