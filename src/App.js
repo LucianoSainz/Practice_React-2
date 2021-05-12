@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {Note} from './Note';
 import {useEffect, useState} from 'react';
 
@@ -7,10 +8,10 @@ export default function App() {
   const [newNote, setNewNote] = useState('');
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(json => {
-       setNotes(json)
+   axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
+       const {data} = response
+       setNotes(data)
     });
   
   }, []);
