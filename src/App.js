@@ -6,12 +6,15 @@ import {useEffect, useState} from 'react';
 export default function App() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
    axios.get('https://jsonplaceholder.typicode.com/posts')
     .then((response) => {
        const {data} = response
-       setNotes(data)
+       setNotes(data);
+       setLoading(false);
     });
   
   }, []);
@@ -22,12 +25,18 @@ export default function App() {
 
   const handleSubmit = (event) =>{
      event.preventDefault();
+
      const noteAddToState = {
-       id: notes.length + 1,
-       title: newNote,
-       body: newNote
-     };
-    setNotes(notes.concat(noteAddToState));
+      title: newNote,
+      body: newNote,
+      userId:1
+    };
+
+     axios.post('https://jsonplaceholder.typicode.com/posts', noteAddToState)
+
+     
+
+    //setNotes(notes.concat(noteAddToState));
     setNewNote('');
   }
 
