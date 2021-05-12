@@ -10,16 +10,15 @@ export default function App(props) {
     setNewNote(event.target.value);
   }
 
-  const handleClick = (event) =>{
-     console.log('create note');
+  const handleSubmit = (event) =>{
+     event.preventDefault();
      const noteAddToState = {
        id: notes.length + 1,
-       content: newNote,
-       date: new Date().toISOString(),
-       important: Math.random() < 0.5
+       title: newNote,
+       body: newNote
      };
     setNotes(notes.concat(noteAddToState));
-    setNotes('')
+    setNewNote('');
   }
 
   return(
@@ -30,10 +29,10 @@ export default function App(props) {
       ))}
       </ol>
 
-      <div>
+      <form onSubmit={handleSubmit}>
       <input type='text' onChange={handleChange} value={newNote} />
-      <button onClick={handleClick}>New Note</button>
-      </div>
+      <button>New Note</button>
+      </form>
     </div>
     );
 }
