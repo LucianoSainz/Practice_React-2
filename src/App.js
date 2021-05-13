@@ -2,6 +2,7 @@ import axios from 'axios';
 import {Note} from './Note';
 import {useEffect, useState} from 'react';
 import { getAllNotes } from './services/notes/getAllNotes';
+import { createNote } from './services/notes/createNote';
 
 
 export default function App() {
@@ -31,14 +32,11 @@ export default function App() {
       userId:1
     };
 
-     axios.post('https://jsonplaceholder.typicode.com/posts', noteAddToState)
-          .then(response => {
-            const {data} = response
-            setNotes(prevNotes => prevNotes.concat(data))
-          });
-    
+    createNote(noteAddToState).then((newNote) => {
+        setNotes((prevNotes) => prevNotes.concat(newNote));
+      });
        setNewNote('');
-  }
+  };
 
   return(
     <div>
