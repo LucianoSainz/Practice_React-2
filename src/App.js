@@ -33,11 +33,12 @@ export default function App() {
     };
 
      axios.post('https://jsonplaceholder.typicode.com/posts', noteAddToState)
-
-     
-
-    //setNotes(notes.concat(noteAddToState));
-    setNewNote('');
+          .then(response => {
+            const {data} = response
+            setNotes(prevNotes => prevNotes.concat(data))
+          });
+    
+       setNewNote('');
   }
 
   return(
